@@ -1,6 +1,5 @@
 package com.wuliwuli.haitao;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +14,9 @@ import android.widget.TabHost;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.google.gson.JsonObject;
-import com.umeng.update.UmengUpdateAgent;
 import com.wuliwuli.haitao.base.AppBaseActivity;
-import com.wuliwuli.haitao.bean.AppInfoBean;
 import com.wuliwuli.haitao.bean.BaseResult;
 import com.wuliwuli.haitao.fragment.HomeFragment;
-import com.wuliwuli.haitao.fragment.RedFragment;
 import com.wuliwuli.haitao.fragment.RedFragment_;
 import com.wuliwuli.haitao.http.NormalPostRequest;
 import com.wuliwuli.haitao.http.UrlManager;
@@ -35,7 +30,6 @@ import java.util.HashMap;
 
 
 public class MainActivity extends AppBaseActivity implements UpdateListener {
-//这里添加了一些注释
     TabHost mTabhost;
     TabManager mTabManager;
     public RadioGroup mRadioG;
@@ -58,8 +52,6 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
         CheekAppVersion check = CheekAppVersion.showNewAppVersion(this, UrlManager.CHECK_UPDATE, map, R.drawable.ic_launcher);
         check.setUpdateListener(this);
 
-
-//        UmengUpdateAgent.update(this);
         sendJpushIdToService();
     }
 
