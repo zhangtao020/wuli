@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/bg_indicator_normal"/>
+
+    <item android:state_checked="true" android:drawable="@drawable/bg_indicator_normal"/>
+
+
+    <!--<item android:state_checked="true">-->
+        <!--<shape>-->
+            <!--<solid android:color="@color/choose_city_text_stroke"></solid>-->
+            <!--<corners android:radius="5dp"></corners>-->
+        <!--</shape>-->
+    <!--</item>-->
+    <!--<item android:state_checked="false">-->
+        <!--<shape>-->
+            <!--<solid android:color="@color/index_normal_bg"></solid>-->
+            <!--<corners android:radius="5dp"></corners>-->
+        <!--</shape>-->
+    <!--</item>-->
+
+
+</selector>

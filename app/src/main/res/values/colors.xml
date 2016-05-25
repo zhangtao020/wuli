@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="color_fbfafa">#FBFAFA</color>
+    <color name="red_ff4350">#FF4350</color>
+    <color name="gray_8c8c8c">#8C8C8C</color>
+    <color name="black_4a4a4a">#4A4A4A</color>
+    <color name="color_9b9b9b">#9B9B9B</color>
+    <color name="color_787878">#787878</color>
+    <color name="color_f0f0f0">#F0F0F0</color>
+    <color name="color_6e6e6e">#6E6E6E</color>
+    <color name="color_646464">#646464</color>
+    <color name="color_535353">#535353</color>
+    <color name="color_ffbb02">#ffbb02</color>
+    <color name="color_ff6e78">#ff6e78</color>
+    <color name="color_e7e7e7">#e7e7e7</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
+    <color name="color_3d3d3d">#3d3d3d</color>
+    <color name="color_c8c8c8">#c8c8c8</color>
+    <color name="title_bar_color1">#FF123F</color>
+    <color name="title_bar_color2">#FF6577</color>
+    <color name="title_bar_color3">#FF9D26</color>
+    <color name="item_pressed_color">#e4e4e4</color>
+</resources>

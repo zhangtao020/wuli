@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wuliwuli.haitao">
+    <application>
+        <meta-data android:value="xiaomi" android:name="UMENG_CHANNEL"/>
+    </application>
+</manifest>

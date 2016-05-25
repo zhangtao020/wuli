@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_pic_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            />
+
+        <LinearLayout
+            android:id="@+id/item_like_container_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="9.5dp"
+            android:background="@drawable/bg_home_like"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/banner_like" />
+
+            <TextView
+                android:id="@+id/item_liked_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="3435"
+                android:textColor="#fff"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_center_info_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textColor="#fff"
+                android:id="@+id/item_center_title_tv"
+                android:layout_gravity="center_horizontal"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_banner"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="67dp"
+                >
+
+                <ImageView
+                    android:id="@+id/item_center_face_iv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/item_center_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/item_btm_rl"
+            >
+
+            <ImageView
+                android:id="@+id/item_uface_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/item_uname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="4.5dp"
+                android:layout_toRightOf="@id/item_uface_iv"
+                android:text="品味好到没朋友"
+                android:textColor="#fff"
+                android:textSize="11dp" />
+
+            <TextView
+                android:id="@+id/item_desc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_uface_iv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="好多包好多包好多包，都是宝宝啊 你喜欢吗喜欢吗喜欢吗喜欢吗"
+                android:textColor="#fff"
+                android:textSize="14dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_desc_tv"
+                android:src="@drawable/icon_product_top"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/item_product_gl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" />
+</LinearLayout>

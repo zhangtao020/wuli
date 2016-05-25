@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_open_bonus_left"
+            android:layout_weight="0"
+            />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_open_bonus_center"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:id="@+id/dialog_open_bonus_money_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:textSize="30dp"
+                android:textColor="#FFD617"
+                android:text="5元"
+                android:layout_marginBottom="70dp"
+                />
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_open_bonus_right"
+            android:layout_weight="0"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/dialog_bonus_close_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:src="@drawable/icon_float_bonus"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        />
+</FrameLayout>

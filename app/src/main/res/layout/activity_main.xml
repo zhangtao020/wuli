@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+        </FrameLayout>
+
+        <View
+            android:background="#b2b2b2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
+
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <RadioGroup
+            android:id="@+id/btm_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="#fbfafa"
+            android:gravity="center"
+            >
+
+            <RadioButton
+                android:tag="@+id/tab_rb_0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:gravity="center"
+                android:text="首页"
+                android:textColor="@drawable/tabs_fontcolor"
+                android:drawableTop="@drawable/draw_tab_home"
+                android:textSize="11dp" />
+            <ImageView
+                android:layout_width="1px"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@drawable/btm_v_line"
+                />
+            <RadioButton
+                android:tag="@+id/tab_rb_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:button="@null"
+                android:gravity="center"
+                android:text="我的红包"
+                android:drawableTop="@drawable/draw_tab_bao"
+                android:textColor="@drawable/tabs_fontcolor"
+                android:textSize="11dp" />
+
+
+        </RadioGroup>
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="right"-->
+            <!--android:layout_marginTop="-42dp">-->
+            <!--<TextView-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="10dp"-->
+                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                <!--android:id="@+id/unRead_table"-->
+                <!--android:textSize="10dp"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--/>-->
+        <!--</RelativeLayout>-->
+    </LinearLayout>
+
+</TabHost>

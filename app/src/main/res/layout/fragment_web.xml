@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/web_container"
+    android:background="#fff"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        layout="@layout/title_bar"
+        />
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_web_view"
+        >
+
+    </WebView>
+
+</LinearLayout>
