@@ -41,16 +41,16 @@ public class ProductImgAdapter extends PagerAdapter {
         return mShowHeight;
     }
 
-//    Handler mHandler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            if(mShowHeight != 0)return;
-//            mShowHeight = (int) msg.obj;
-//            FrameLayout.LayoutParams pagerParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,mShowHeight);
-//            mViewPager.setLayoutParams(pagerParams);
-//        }
-//    };
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(mShowHeight != 0)return;
+            mShowHeight = (int) msg.obj;
+            FrameLayout.LayoutParams pagerParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,mShowHeight);
+            mViewPager.setLayoutParams(pagerParams);
+        }
+    };
 
     @Override
     public int getCount() {
@@ -67,7 +67,7 @@ public class ProductImgAdapter extends PagerAdapter {
         ImageView imageView = list.get(position);
         ((ViewPager) container).addView(imageView);
         String imgUrl = (String)imageView.getTag();
-        picasso.load(imgUrl).transform(new Transformation(mScreenWidth)).into(imageView);
+        picasso.load(imgUrl).transform(new Transformation(mScreenWidth,mHandler)).into(imageView);
         return imageView;
     }
 

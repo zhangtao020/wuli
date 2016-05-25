@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -195,11 +196,13 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
                 public void run() {
                     super.run();
                     try {
+                        Looper.prepare();
                         shareBitmap = mPicasso.load(mProductData.product.img.get(0).url).get();
                         double aspectRatio = (double) shareBitmap.getHeight() / (double) shareBitmap.getWidth();
                         int targetHeight = (int) (AppApplication.DISPLAY_WIDTH * aspectRatio);
                         FrameLayout.LayoutParams pagerParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,targetHeight);
                         info_view_pager.setLayoutParams(pagerParams);
+                        Looper.loop();
                     } catch (IOException e) {
                     }
                 }
