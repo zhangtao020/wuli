@@ -35,7 +35,7 @@ import java.util.HashMap;
 
 
 public class MainActivity extends AppBaseActivity implements UpdateListener {
-
+//这里添加了一些注释
     TabHost mTabhost;
     TabManager mTabManager;
     public RadioGroup mRadioG;
@@ -255,7 +255,7 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
             isMoreTab = "d".equals(tabId);
 //			setMessageStatus(MessageCenter.updataNum());
 //			setSysStatusBar();
-        }    
+        }
 
     }
 
