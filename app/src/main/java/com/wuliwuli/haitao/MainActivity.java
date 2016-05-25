@@ -255,7 +255,7 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
             isMoreTab = "d".equals(tabId);
 //			setMessageStatus(MessageCenter.updataNum());
 //			setSysStatusBar();
-        }
+        }    
 
     }
 
