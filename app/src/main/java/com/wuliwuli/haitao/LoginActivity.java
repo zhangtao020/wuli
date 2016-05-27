@@ -201,11 +201,12 @@ public class LoginActivity extends SocialService implements LoadPageListener{
                         if (response.data == null) {
                             return;
                         }
-                        if(TextUtils.isEmpty(response.data.id) || response.data.id == null){
-                            ToastUtil.show("登录失败,请重新登录");
-                            return;
-                        }
+
                         if (response.data.is_type == 1) {
+                            if(TextUtils.isEmpty(response.data.id) || response.data.id == null){
+                                ToastUtil.show("登录失败,请重新登录");
+                                return;
+                            }
                             WuliConfig.getInstance().saveStringInfoToLocal(WuliConfig.USER_NAME, response.data.nick_name);
                             WuliConfig.getInstance().saveStringInfoToLocal(WuliConfig.USER_FACE, response.data.face);
                             WuliConfig.getInstance().saveStringInfoToLocal(WuliConfig.TOKEN_ID, response.data.token);

@@ -9,8 +9,8 @@ android {
         applicationId "com.wuliwuli.haitao"
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
     }
 
     signingConfigs {
@@ -20,7 +20,6 @@ android {
             storeFile file("wuli.keystore.jks")
             storePassword "wuli123456"
             keyAlias "wuli"
-
             keyPassword "wuli123456"
         }
 

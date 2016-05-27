@@ -105,7 +105,7 @@ public class BonusAdapter extends RecyclerView.Adapter{
 
             picasso.load(bean.cover_img).into(vHolder.picIv);
             vHolder.titleTv.setText(bean.nick_name+" 购买了这个商品");
-            vHolder.timeTv.setText(bean.is_open==0?("预计"+bean.order_time+"到账"):(bean.order_time+"到账"));
+            vHolder.timeTv.setText(TextUtils.isEmpty(bean.order_time)?"":bean.order_time);
             vHolder.numberTv.setText("订单编号："+bean.order_sn);
 
             if(bean.is_open == 0){

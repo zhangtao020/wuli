@@ -47,6 +47,7 @@ public class HomeFragment extends AppBaseFragment{
 
     int lastVisibleItem = 0;
     String maxId="",disorder="";
+    boolean isLoadMore = false;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -87,7 +88,8 @@ public class HomeFragment extends AppBaseFragment{
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView,int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
+                if (isLoadMore && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
+                    isLoadMore = true;
                     mHandler.sendEmptyMessageDelayed(2, 300);
                 }
             }
@@ -128,6 +130,7 @@ public class HomeFragment extends AppBaseFragment{
                 new Response.Listener<InfoBean>() {
                     @Override
                     public void onResponse(InfoBean response) {
+                        isLoadMore =false;
                         refreshLayout.setRefreshing(false);
                         if(!parseHeadObject(response)){
                             return;
@@ -146,6 +149,7 @@ public class HomeFragment extends AppBaseFragment{
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("", error.getMessage(), error);
+                isLoadMore =false;
                 refreshLayout.setRefreshing(false);
             }
         }, obj,InfoBean.class);
