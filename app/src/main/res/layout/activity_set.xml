@@ -143,7 +143,16 @@
                 android:textSize="15dp"
                 android:background="#fff"
                 android:gravity="center"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="30dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setting_version_tv"
+                android:textSize="13dp"
+                android:textColor="@color/color_6e6e6e"
+                android:layout_marginBottom="5dp"
+                android:layout_gravity="center_horizontal"
                 />
             </LinearLayout>
     </ScrollView>

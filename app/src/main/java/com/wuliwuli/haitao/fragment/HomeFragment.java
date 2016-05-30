@@ -88,7 +88,7 @@ public class HomeFragment extends AppBaseFragment{
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView,int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (isLoadMore && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
+                if (!isLoadMore && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
                     isLoadMore = true;
                     mHandler.sendEmptyMessageDelayed(2, 300);
                 }
@@ -109,6 +109,8 @@ public class HomeFragment extends AppBaseFragment{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.what == 1){
+                maxId="";
+                disorder = "";
                 requestHomeData("");
             }else if(msg.what == 2){
                 requestHomeData(maxId);

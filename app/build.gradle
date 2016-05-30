@@ -9,8 +9,8 @@ android {
         applicationId "com.wuliwuli.haitao"
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.1.1"
     }
 
     signingConfigs {
@@ -46,10 +46,7 @@ android {
     }
 
     productFlavors{
-        apk_360(){}
-        apk_xiaomi(){}
         apk_yingyongbao(){}
-        apk_baidu(){}
     }
 }
 

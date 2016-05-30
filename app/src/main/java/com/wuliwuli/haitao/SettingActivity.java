@@ -47,6 +47,8 @@ public class SettingActivity extends AppBaseActivity {
     ImageView red_user_face_iv;
     @ViewById
     TextView red_user_name_tv;
+    @ViewById
+    TextView setting_version_tv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class SettingActivity extends AppBaseActivity {
             red_user_face_iv.setImageBitmap(AppUtil.initFace(this));
         }
         red_user_name_tv.setText(getIntent().getStringExtra("name"));
+
+        setting_version_tv.setText("版本号："+AppUtil.getVersionName());
     }
 
     @Click(R.id.setting_about_tv)
