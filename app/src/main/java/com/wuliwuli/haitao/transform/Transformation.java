@@ -27,7 +27,6 @@ public class Transformation implements com.squareup.picasso.Transformation {
     @Override
     public Bitmap transform(Bitmap source) {
         int targetWidth = mScreenWidth;
-        Log.d("zt","transform==========");
         try {
             double aspectRatio = (double) source.getHeight() / (double) source.getWidth();
             int targetHeight = (int) (targetWidth * aspectRatio);

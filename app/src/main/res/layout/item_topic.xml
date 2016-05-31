@@ -42,7 +42,7 @@
         android:layout_marginRight="9dp"
         android:textColor="@color/color_787878"
         android:textSize="14dp"
-        android:singleLine="true"
+        android:singleLine="false"
         android:ellipsize="end"
         />
 

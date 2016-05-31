@@ -3,24 +3,21 @@
     android:id="@android:id/tabhost"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@android:color/transparent"
+    >
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        >
 
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp" >
         </FrameLayout>
-
-        <View
-            android:background="#b2b2b2"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp" />
 
 
         <TabWidget
@@ -29,63 +26,71 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
-        <RadioGroup
-            android:id="@+id/btm_navigation"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="#fbfafa"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_gravity="bottom"
             >
-
-            <RadioButton
-                android:tag="@+id/tab_rb_0"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:button="@null"
+            <RadioGroup
+                android:id="@+id/btm_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_btm_bar"
                 android:gravity="center"
-                android:text="首页"
-                android:textColor="@drawable/tabs_fontcolor"
-                android:drawableTop="@drawable/draw_tab_home"
-                android:textSize="11dp" />
-            <ImageView
-                android:layout_width="1px"
+                android:layout_gravity="bottom"
+                >
+                <RadioButton
+                    android:tag="@+id/tab_rb_0"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="首页"
+                    android:textColor="@drawable/tabs_fontcolor"
+                    android:drawableTop="@drawable/draw_tab_home"
+                    android:textSize="11dp" />
+                <!--<ImageView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--/>-->
+                <RadioButton
+                    android:tag="@+id/tab_rb_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:button="@null"
+                    android:gravity="center"
+                    />
+                <RadioButton
+                    android:tag="@+id/tab_rb_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="我的红包"
+                    android:drawableTop="@drawable/draw_tab_bao"
+                    android:textColor="@drawable/tabs_fontcolor"
+                    android:textSize="11dp" />
+            </RadioGroup>
+            <Button
+                android:id="@+id/tab_global_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:background="@drawable/btm_v_line"
+                android:textSize="10dp"
+                android:textColor="@color/color_282828"
+                android:text="全球最低"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:drawableTop="@drawable/btm_global"
+                android:drawablePadding="2.5dp"
+                android:paddingBottom="4dp"
                 />
-            <RadioButton
-                android:tag="@+id/tab_rb_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:button="@null"
-                android:gravity="center"
-                android:text="我的红包"
-                android:drawableTop="@drawable/draw_tab_bao"
-                android:textColor="@drawable/tabs_fontcolor"
-                android:textSize="11dp" />
-
-
-        </RadioGroup>
-        <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="right"-->
-            <!--android:layout_marginTop="-42dp">-->
-            <!--<TextView-->
-                <!--android:layout_width="10dp"-->
-                <!--android:layout_height="10dp"-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-                <!--android:id="@+id/unRead_table"-->
-                <!--android:textSize="10dp"-->
-                <!--android:gravity="center"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:visibility="gone"-->
-                <!--android:layout_marginRight="20dp"-->
-                <!--/>-->
-        <!--</RelativeLayout>-->
-    </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
 
 </TabHost>

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
@@ -16,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.wuliwuli.haitao.base.AppBaseActivity;
 import com.wuliwuli.haitao.bean.BaseResult;
+import com.wuliwuli.haitao.fragment.GlobalFragment;
 import com.wuliwuli.haitao.fragment.HomeFragment;
 import com.wuliwuli.haitao.fragment.RedFragment_;
 import com.wuliwuli.haitao.http.NormalPostRequest;
@@ -31,8 +33,9 @@ import java.util.HashMap;
 
 public class MainActivity extends AppBaseActivity implements UpdateListener {
     TabHost mTabhost;
+    Button mGlobalBtn;
     TabManager mTabManager;
-    public RadioGroup mRadioG;
+    RadioGroup mRadioG;
     RadioButton mRadios[];
 
     @Override
@@ -78,41 +81,52 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
 
 
     private void findview(Bundle savedInstanceState){
+        mGlobalBtn = (Button) findViewById(R.id.tab_global_btn);
         mTabhost = (TabHost) findViewById(android.R.id.tabhost);
         mTabhost.setup();
 
         mTabManager = new TabManager(this, mTabhost, android.R.id.tabcontent);
+        mGlobalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTabhost.setCurrentTabByTag("b");
+                RadioButton rb = (RadioButton) mRadioG.getChildAt(1);
+                rb.setChecked(true);
+            }
+        });
 
         mTabManager.addTab(mTabhost.newTabSpec("a").setIndicator("a"), HomeFragment.class, null);
-        mTabManager.addTab(mTabhost.newTabSpec("b").setIndicator("b"), RedFragment_.class, null);
+        mTabManager.addTab(mTabhost.newTabSpec("b").setIndicator("b"), GlobalFragment.class, null);
+        mTabManager.addTab(mTabhost.newTabSpec("c").setIndicator("c"), RedFragment_.class, null);
 
         if(savedInstanceState != null){
             mTabhost.setCurrentTabByTag(savedInstanceState.getString("tag"));
         }else{
-            mTabhost.setCurrentTabByTag("a");
+            mTabhost.setCurrentTabByTag("b");
         }
     }
 
     private void initNavigationView(){
         mRadioG = (RadioGroup) findViewById(R.id.btm_navigation);
-        mRadios = new RadioButton[2];
+        mRadios = new RadioButton[3];
         for(int i=0;i<mRadioG.getChildCount();i++){
-            if(i == 1)continue;
+//            if(i == 1)continue;
             RadioButton rb = (RadioButton) mRadioG.getChildAt(i);
-            if(i ==0){
-                mRadios[i] = rb;
-            }else{
-                mRadios[1] = rb;
-            }
+            mRadios[i] = rb;
+//            if(i ==0){
+//                mRadios[i] = rb;
+//            }else{
+//                mRadios[1] = rb;
+//            }
         }
 
-        mRadios[0].setChecked(true);
+//        mRadios[0].setChecked(true);
         mRadioG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup rg, int checkedId) {
                 for(int i=0;i<rg.getChildCount();i++){
-                    if(i == 1)continue;
+//                    if(i == 1)continue;
                     RadioButton rb = (RadioButton) rg.getChildAt(i);
                     if(rb.isChecked()) {
                         if(i !=0 && !WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false)){
@@ -123,7 +137,8 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
                             startActivity(intent);
                             break;
                         }
-                        mTabhost.setCurrentTab(i == 0 ? 0 : 1);
+//                        mTabhost.setCurrentTab(i == 0 ? 0 : 2);
+                        mTabhost.setCurrentTab(i);
                         break;
                     }
                 }

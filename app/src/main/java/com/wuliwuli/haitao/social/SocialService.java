@@ -80,6 +80,7 @@ public class SocialService extends AppBaseActivity implements IWXAPIEventHandler
                     }else{
                         loadPageListener.doLoadSuccess();
                     }
+//                    finish();
                     break;
                 case BaseResp.ErrCode.ERR_USER_CANCEL:
                     break;

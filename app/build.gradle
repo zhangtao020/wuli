@@ -23,14 +23,14 @@ android {
             keyPassword "wuli123456"
         }
 
-//        debug {
-//            // 这样写就得把 demo.jk文件放在项目目录
-//            storeFile file("wuli.keystore.jks")
-//            storePassword "wuli123456"
-//            keyAlias "wuli"
-//
-//            keyPassword "wuli123456"
-//        }
+        debug {
+            // 这样写就得把 demo.jk文件放在项目目录
+            storeFile file("wuli.keystore.jks")
+            storePassword "wuli123456"
+            keyAlias "wuli"
+
+            keyPassword "wuli123456"
+        }
     }
 
     buildTypes {
