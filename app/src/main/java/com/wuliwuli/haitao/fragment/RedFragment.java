@@ -62,12 +62,25 @@ public class RedFragment extends AppBaseFragment{
     TextView red_user_id_tv;
     @ViewById
     TextView redbao_money_tv;
+    @ViewById
+    TextView redbao_fuli2_tv;
 
     PPersonBean.ContentBean dataBean;
     Picasso mPicasso = null;
     @AfterViews
     public void onViewCreate(){
         setMainTitle("我的红包");
+        TextView setTv = (TextView) getTitleBar().findViewById(R.id.title_set_btn);
+        setTv.setVisibility(View.VISIBLE);
+        setTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mActivity, SettingActivity_.class);
+                intent.putExtra("face",dataBean.face);
+                intent.putExtra("name",dataBean.nick_name);
+                startActivity(intent);
+            }
+        });
         mPicasso = Picasso.with(mActivity);
     }
 
@@ -108,11 +121,9 @@ public class RedFragment extends AppBaseFragment{
         startActivity(intent);
     }
 
-    @Click(R.id.redbao_setting_tv)
+    @Click(R.id.redbao_set_fuli_rl)
     public void clickBySetting(){
-        Intent intent = new Intent(mActivity, SettingActivity_.class);
-        intent.putExtra("face",dataBean.face);
-        intent.putExtra("name",dataBean.nick_name);
+        Intent intent = new Intent(mActivity, MyRedbaoActivity.class);
         startActivity(intent);
     }
 
@@ -133,6 +144,7 @@ public class RedFragment extends AppBaseFragment{
         red_user_name_tv.setText(dataBean.nick_name);
         red_user_id_tv.setText("ID:"+dataBean.id);
         redbao_money_tv.setText(dataBean.sum_bonus);
+        redbao_fuli2_tv.setText("￥"+dataBean.sum_bonus);
     }
 
     public void requestPersonData(){

@@ -1,6 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wuliwuli.haitao">
-    <application>
-        <meta-data android:value="zhushou360" android:name="UMENG_CHANNEL"/>
-    </application>
-</manifest>

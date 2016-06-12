@@ -28,7 +28,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="50dp"
+                    android:paddingBottom="20dp"
                     >
                     <ImageView
                         android:id="@+id/red_user_top_iv"
@@ -89,6 +89,7 @@
                             android:textColor="#fff"
                             android:text="红包金额"
                             android:gravity="center"
+                            android:visibility="gone"
                             />
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -96,11 +97,13 @@
                             android:orientation="horizontal"
                             android:gravity="center"
                             android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="12.5dp"
                             >
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
+
                                 android:textSize="15dp"
                                 android:textColor="#fff"
                                 android:text="￥"
@@ -128,7 +131,52 @@
                             />
                     </LinearLayout>
                 </FrameLayout>
+                <TextView
+                    android:id="@+id/redbao_fuli_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41.5dp"
+                    android:text="如何获得Wuli红包 >"
+                    android:textColor="@color/black_4a4a4a"
+                    android:textSize="15dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_horizontal"
+                    />
             </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/linear_divider"
+                />
+            <RelativeLayout
+                android:id="@+id/redbao_set_fuli_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/redbao_fuli1_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41.5dp"
+                    android:text="Wuli红包"
+                    android:textColor="@color/black_4a4a4a"
+                    android:textSize="15dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:drawableLeft="@drawable/icon_my_fuli"
+                    android:drawablePadding="10dp"
+                    android:layout_alignParentLeft="true"
+                    />
+                <TextView
+                    android:id="@+id/redbao_fuli2_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41.5dp"
+                    android:text="99"
+                    android:textColor="@color/black_4a4a4a"
+                    android:textSize="14dp"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    />
+            </RelativeLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -191,46 +239,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@drawable/linear_divider"
-                />
-            <TextView
-                android:id="@+id/redbao_fuli_tv"
-                android:layout_width="match_parent"
-                android:layout_height="41.5dp"
-                android:text="Wuliwuli发红包了"
-                android:textColor="@color/black_4a4a4a"
-                android:textSize="15dp"
-                android:background="#fff"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:drawableLeft="@drawable/icon_my_fuli"
-                android:drawablePadding="10dp"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_e7e7e7"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                />
-            <TextView
-                android:id="@+id/redbao_setting_tv"
-                android:layout_width="match_parent"
-                android:layout_height="41.5dp"
-                android:text="设置"
-                android:textColor="@color/black_4a4a4a"
-                android:textSize="15dp"
-                android:background="#fff"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:drawableLeft="@drawable/icon_set"
-                android:drawablePadding="10dp"
-                />
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_e7e7e7"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 />
             <TextView
                 android:id="@+id/redbao_question_tv"

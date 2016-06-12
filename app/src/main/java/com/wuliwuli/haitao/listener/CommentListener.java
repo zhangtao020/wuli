@@ -31,6 +31,7 @@ import com.wuliwuli.haitao.http.NormalPostRequest;
 import com.wuliwuli.haitao.http.UrlManager;
 import com.wuliwuli.haitao.util.ScreenUtil;
 import com.wuliwuli.haitao.util.ToastUtil;
+import com.wuliwuli.haitao.util.Util;
 import com.wuliwuli.haitao.util.WuliConfig;
 
 import java.util.HashMap;
@@ -118,6 +119,8 @@ public class CommentListener extends AppBaseListener{
 
                 sendWriteCommentData(editText.getText().toString());
                 dialog.dismiss();
+//                Util.toggleSoftKeyobard();
+                Util.closeKeyboard(mContext,editText.getWindowToken());
             }
         });
 
@@ -128,6 +131,7 @@ public class CommentListener extends AppBaseListener{
         w.setAttributes(params);
         dialog.show();
 
-
+//        Util.toggleSoftKeyobard();
+        Util.openKeyboard(mContext,editText);
     }
 }

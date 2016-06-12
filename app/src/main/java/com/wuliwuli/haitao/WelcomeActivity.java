@@ -113,7 +113,7 @@ public class WelcomeActivity extends AppBaseActivity {
 
 
     public void start() {
-        Intent intent = new Intent(this, LoginActivity_.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

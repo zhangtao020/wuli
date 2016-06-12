@@ -167,6 +167,14 @@
             >
 
         </activity>
+        <activity
+            android:name=".GlobalProductInfoActivity_"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
 
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -188,21 +196,6 @@
         <meta-data
             android:value="5719e868e0f55ace27000e7b"
             android:name="UMENG_APPKEY"/>
-        <!-- Update Activitys Start -->
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
-
-        <!-- Update Activitys End -->
-
-        <service
-            android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" >
-        </service>
-
-
-
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

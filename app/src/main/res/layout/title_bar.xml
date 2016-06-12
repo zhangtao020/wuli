@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/title_bar"
-    android:background="@drawable/bg_title_bar"
+    android:background="@color/color_220b0b"
     android:fitsSystemWindows="true"
     >
 
@@ -42,7 +42,18 @@
         android:gravity="right|center_vertical"
         android:src="@drawable/icon_share"
         />
-
+    <TextView
+        android:id="@+id/title_set_btn"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:paddingRight="10dp"
+        android:layout_alignParentRight="true"
+        android:gravity="right|center_vertical"
+        android:text="设置"
+        android:textSize="16dp"
+        android:textColor="#fff"
+        />
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"

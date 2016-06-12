@@ -48,10 +48,12 @@
                     android:layout_weight="1.0"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="首页"
+                    android:text="发现好货"
                     android:textColor="@drawable/tabs_fontcolor"
                     android:drawableTop="@drawable/draw_tab_home"
-                    android:textSize="11dp" />
+                    android:textSize="11dp"
+                    android:drawablePadding="3dp"
+                    />
                 <!--<ImageView-->
                     <!--android:layout_width="0dp"-->
                     <!--android:layout_height="wrap_content"-->
@@ -72,22 +74,23 @@
                     android:layout_weight="1.0"
                     android:button="@null"
                     android:gravity="center"
-                    android:text="我的红包"
+                    android:text="Wuli红包"
                     android:drawableTop="@drawable/draw_tab_bao"
                     android:textColor="@drawable/tabs_fontcolor"
-                    android:textSize="11dp" />
+                    android:textSize="11dp"
+                    android:drawablePadding="3dp"
+                    />
             </RadioGroup>
             <Button
                 android:id="@+id/tab_global_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
-                android:textColor="@color/color_282828"
                 android:text="全球最低"
                 android:layout_gravity="center"
                 android:background="@null"
                 android:drawableTop="@drawable/btm_global"
-                android:drawablePadding="2.5dp"
+                android:drawablePadding="3dp"
                 android:paddingBottom="4dp"
                 />
         </FrameLayout>

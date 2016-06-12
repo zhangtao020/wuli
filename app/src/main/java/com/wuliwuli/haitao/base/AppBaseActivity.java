@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.umeng.analytics.MobclickAgent;
 import com.wuliwuli.haitao.R;
 import com.wuliwuli.haitao.bean.BaseResult;
 import com.wuliwuli.haitao.util.ToastUtil;
@@ -187,7 +188,8 @@ public class AppBaseActivity extends AppCompatActivity implements View.OnClickLi
         setTranslucentStatus(true);
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintDrawable(getResources().getDrawable(R.drawable.bg_title_bar));
+//        tintManager.setStatusBarTintDrawable(getResources().getDrawable(R.drawable.bg_title_bar));
+        tintManager.setStatusBarTintColor(getResources().getColor(R.color.color_220b0b));
     }
 
     public void setSystemBarTitByColor(){
@@ -205,4 +207,17 @@ public class AppBaseActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void reloadCurrentPage(){}
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

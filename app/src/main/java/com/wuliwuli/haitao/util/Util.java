@@ -13,10 +13,18 @@ import java.net.URLConnection;
 
 import junit.framework.Assert;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+
+import com.wuliwuli.haitao.base.AppApplication;
 
 public class Util {
 	
@@ -255,5 +263,57 @@ public class Util {
 		}
 
 		return null;
+	}
+
+
+	private static Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			InputMethodManager imm = (InputMethodManager) AppApplication.application.getSystemService(Context.INPUT_METHOD_SERVICE);
+			if(msg.what == 10){
+				imm.toggleSoftInputFromWindow((IBinder)msg.obj, 0, InputMethodManager.HIDE_NOT_ALWAYS);
+			}else if(msg.what == 11){
+//				imm.hideSoftInputFromInputMethod((IBinder)msg.obj, InputMethodManager.HIDE_NOT_ALWAYS);
+				imm.toggleSoftInput(InputMethodManager.RESULT_HIDDEN,0);
+			}else if(msg.what == 12){
+				imm.showSoftInputFromInputMethod((IBinder) msg.obj, InputMethodManager.SHOW_IMPLICIT);
+			}else if(msg.what == 13){
+				imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+			}
+		}
+	};
+
+	public static   void toggleSoftKeyobard(IBinder iBinder) {
+		handler.sendMessageDelayed(handler.obtainMessage(10, iBinder), 200);
+	}
+
+	public static  void closeSoftKeyboard(IBinder iBinder){
+		handler.sendMessageDelayed(handler.obtainMessage(11, iBinder), 200);
+	}
+
+	public static  void openSoftKeyboard(IBinder iBinder){
+		handler.sendMessageDelayed(handler.obtainMessage(12, iBinder), 200);
+	}
+
+	public static   void toggleSoftKeyobard() {
+		handler.sendMessageDelayed(handler.obtainMessage(13), 200);
+	}
+
+	public static void openKeyboard(final Context context,final View view){
+
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				InputMethodManager inputManager = (InputMethodManager) context
+						.getSystemService(Context. INPUT_METHOD_SERVICE);
+				inputManager.showSoftInput(view, 0);
+			}
+		},200);
+	}
+
+	public static void closeKeyboard(Context context,IBinder iBinder){
+		((InputMethodManager) context
+				.getSystemService(Context. INPUT_METHOD_SERVICE))
+				.hideSoftInputFromWindow(iBinder,InputMethodManager. HIDE_NOT_ALWAYS);
 	}
 }

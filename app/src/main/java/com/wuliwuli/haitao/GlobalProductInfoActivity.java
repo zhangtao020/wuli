@@ -1,25 +1,19 @@
 package com.wuliwuli.haitao;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -29,19 +23,15 @@ import com.squareup.picasso.Picasso;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.wuliwuli.haitao.adapter.ProductImgAdapter;
 import com.wuliwuli.haitao.base.AppApplication;
-import com.wuliwuli.haitao.base.AppBaseActivity;
 import com.wuliwuli.haitao.bean.PBuyUrlBean;
-import com.wuliwuli.haitao.bean.PProductBean;
-import com.wuliwuli.haitao.bean.ProductBean;
+import com.wuliwuli.haitao.bean.PGlobalInfoBean;
 import com.wuliwuli.haitao.http.NormalPostRequest;
 import com.wuliwuli.haitao.http.UrlManager;
 import com.wuliwuli.haitao.listener.BonusListener;
-import com.wuliwuli.haitao.listener.DetailLikeListener;
-import com.wuliwuli.haitao.listener.LikeListener;
+import com.wuliwuli.haitao.listener.GlobalLikeListener;
 import com.wuliwuli.haitao.listener.ShareIndiListener;
 import com.wuliwuli.haitao.listener.ViewPagerIndicator;
 import com.wuliwuli.haitao.social.SocialService;
-import com.wuliwuli.haitao.transform.Transformation;
 import com.wuliwuli.haitao.util.AppUtil;
 import com.wuliwuli.haitao.util.ButtonType;
 import com.wuliwuli.haitao.util.ScreenUtil;
@@ -50,7 +40,6 @@ import com.wuliwuli.haitao.util.WuliConfig;
 import com.wuliwuli.haitao.view.ShareDialog;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -63,8 +52,8 @@ import java.util.Map;
 /**
  * Created by mac-z on 16/4/16.
  */
-@EActivity(R.layout.activity_product_info)
-public class ProductInfoActivity extends SocialService implements ShareDialog.AlertViewClick {
+@EActivity(R.layout.activity_global_product_info)
+public class GlobalProductInfoActivity extends SocialService implements ShareDialog.AlertViewClick {
 
     @ViewById
     LinearLayout btm_bar;
@@ -85,9 +74,7 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
     @ViewById
     ImageView info_product_bonus_iv;
     @ViewById
-    TextView info_discount_price_tv;
-    @ViewById
-    TextView info_old_price_tv;
+    TextView info_global_price_tv;
     @ViewById
     FrameLayout info_compare_container;
     @ViewById
@@ -115,25 +102,17 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
     @ViewById
     TextView info_link_tv;
     @ViewById
-    TextView info_like_tv;
-    @ViewById
-    TextView info_comment_tv;
-    @ViewById
-    ImageView info_user_face_iv;
-    @ViewById
-    TextView info_user_name_tv;
-    @ViewById
-    TextView info_user_time_tv;
-    @ViewById
     TextView info_user_desc_tv;
     @ViewById
     LinearLayout info_product_img_ll;
+    @ViewById
+    TextView info_product_desc_tv;
     @ViewById
     LinearLayout view_net_error;
     @ViewById
     TextView net_error_reload_tv;
 
-    PProductBean.ContentBean mProductData;
+    PGlobalInfoBean.ContentBean mProductData;
 
     Picasso mPicasso;
     ProductImgAdapter mViewPagerAdapter;
@@ -150,13 +129,13 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
             @Override
             public void onClick(View v) {
                 if(!WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false)){
-                    Intent intent = new Intent(ProductInfoActivity.this,LoginActivity_.class);
+                    Intent intent = new Intent(GlobalProductInfoActivity.this,LoginActivity_.class);
                     intent.putExtra("showback",true);
                     startActivity(intent);
                     return;
                 }
 
-                shareDialog = ShareDialog.showDialog(ProductInfoActivity.this,ProductInfoActivity.this);
+                shareDialog = ShareDialog.showDialog(GlobalProductInfoActivity.this,GlobalProductInfoActivity.this);
             }
         });
 
@@ -171,6 +150,73 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
         }
     }
 
+    private void showContentView(){
+        if(mProductData.floor == null){
+            ToastUtil.show("请求失败");
+            return;
+        }
+
+        btm_bar.setVisibility(ViewPager.VISIBLE);
+        info_content_view.setVisibility(ViewPager.VISIBLE);
+
+        List<ImageView> bannerViewList = new ArrayList<ImageView>();
+        for(PBuyUrlBean.BuyUrlBean urlBean : mProductData.floor.img){
+            ImageView imageView = new ImageView(this);
+            imageView.setTag(urlBean.url);
+            bannerViewList.add(imageView);
+        }
+
+        mViewPagerAdapter = new ProductImgAdapter(this,bannerViewList,info_view_pager);
+        info_view_pager.setAdapter(mViewPagerAdapter);
+        initViewPagerIndicator();
+
+        if(mProductData.floor.img!=null && !mProductData.floor.img.isEmpty()){
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    try {
+                        shareBitmap = mPicasso.load(mProductData.floor.img.get(0).url).get();
+                        handler.sendEmptyMessage(1);
+                    } catch (IOException e) {
+                    }
+                }
+            }.start();
+        }
+
+        info_product_title_tv.setText(mProductData.floor.title);
+        info_global_price_tv.setText(mProductData.floor.price_title);
+
+        if(!TextUtils.isEmpty(mProductData.floor.jd_price) || !TextUtils.isEmpty(mProductData.floor.weipin_price) || !TextUtils.isEmpty(mProductData.floor.kaola_price)){
+            info_compare_container.setVisibility(View.VISIBLE);
+
+            if(!TextUtils.isEmpty(mProductData.floor.jd_price)){
+                info_compare1_name_tv.setText(mProductData.floor.jd_price);
+                info_compare1.setVisibility(View.VISIBLE);
+            }
+
+            if(!TextUtils.isEmpty(mProductData.floor.weipin_price)){
+                info_compare2_name_tv.setText(mProductData.floor.weipin_price);
+                info_compare2.setVisibility(View.VISIBLE);
+            }
+
+            if(!TextUtils.isEmpty(mProductData.floor.kaola_price)){
+                info_compare3_name_tv.setText(mProductData.floor.kaola_price);
+                info_compare3.setVisibility(View.VISIBLE);
+            }
+        }
+        mPicasso.load(mProductData.floor.country_logo).into(info_country_iv);
+        info_country_tv.setText(mProductData.floor.country_name);
+        info_link_tv.setText(mProductData.floor.business);
+        info_user_desc_tv.setText(mProductData.floor.impression);
+        info_product_desc_tv.setText(mProductData.floor.description);
+
+        info_like2_tv.setSelected(mProductData.floor.is_liked == 1);
+        info_like_ll.setOnClickListener(new GlobalLikeListener(this, info_like2_tv, mProductData.floor));
+
+        info_product_bonus_iv.setOnClickListener(new ShareIndiListener(this,mHandler));
+        info_buy_ib.setOnClickListener(new BonusListener(true,this,mProductData.floor.id));
+    }
 
     Handler handler = new Handler(){
         @Override
@@ -184,104 +230,21 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
         }
     };
 
-
-    private void showContentView(){
-        if(mProductData.product == null){
-            ToastUtil.show("请求失败");
-            return;
-        }
-
-        btm_bar.setVisibility(ViewPager.VISIBLE);
-        info_content_view.setVisibility(ViewPager.VISIBLE);
-
-        List<ImageView> bannerViewList = new ArrayList<ImageView>();
-        for(PBuyUrlBean.BuyUrlBean urlBean : mProductData.product.img){
-            ImageView imageView = new ImageView(this);
-            imageView.setTag(urlBean.url);
-            bannerViewList.add(imageView);
-        }
-
-        mViewPagerAdapter = new ProductImgAdapter(this,bannerViewList,info_view_pager);
-        info_view_pager.setAdapter(mViewPagerAdapter);
-        initViewPagerIndicator();
-
-        if(mProductData.product.img!=null && !mProductData.product.img.isEmpty()){
-            new Thread(){
-                @Override
-                public void run() {
-                    super.run();
-                    try {
-                        Looper.prepare();
-                        shareBitmap = mPicasso.load(mProductData.product.img.get(0).url).get();
-                        handler.sendEmptyMessage(1);
-                    } catch (IOException e) {
-                    }
-                }
-            }.start();
-        }
-
-        info_product_title_tv.setText(mProductData.product.name);
-        info_discount_price_tv.setText(mProductData.product.price);
-        info_old_price_tv.setText(mProductData.product.origin_price);
-        info_old_price_tv.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        if(!TextUtils.isEmpty(mProductData.product.jd_price) || !TextUtils.isEmpty(mProductData.product.weipin_price) || !TextUtils.isEmpty(mProductData.product.kaola_price)){
-            info_compare_container.setVisibility(View.VISIBLE);
-
-            if(!TextUtils.isEmpty(mProductData.product.jd_price)){
-                info_compare1_name_tv.setText(mProductData.product.jd_price);
-                info_compare1.setVisibility(View.VISIBLE);
-            }
-
-            if(!TextUtils.isEmpty(mProductData.product.weipin_price)){
-                info_compare2_name_tv.setText(mProductData.product.weipin_price);
-                info_compare2.setVisibility(View.VISIBLE);
-            }
-
-            if(!TextUtils.isEmpty(mProductData.product.kaola_price)){
-                info_compare3_name_tv.setText(mProductData.product.kaola_price);
-                info_compare3.setVisibility(View.VISIBLE);
-            }
-        }
-        mPicasso.load(mProductData.product.country_logo).into(info_country_iv);
-        info_country_tv.setText(mProductData.product.country_name);
-        info_link_tv.setText("来自" + mProductData.product.business);
-        info_like_tv.setSelected(mProductData.product.is_liked == 1);
-        info_like_tv.setText(String.valueOf(mProductData.product.liked_total));
-        info_like_tv.setOnClickListener(new LikeListener(this, info_like_tv, mProductData.product));
-        info_comment_tv.setText(mProductData.product.comment_total);
-        mPicasso.load(mProductData.product.face).into(info_user_face_iv);
-        info_user_name_tv.setText(mProductData.product.uname);
-        info_user_time_tv.setText(mProductData.product.created);
-        info_user_desc_tv.setText(mProductData.product.description);
-        info_like2_tv.setSelected(mProductData.product.is_liked == 1);
-        info_like_ll.setOnClickListener(new DetailLikeListener(this, info_like2_tv, mProductData.product));
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
-        for(String url : mProductData.product.content){
-            ImageView imageView = new ImageView(this);
-            mPicasso.load(url).transform(new Transformation(AppApplication.DISPLAY_WIDTH)).into(imageView);
-            info_product_img_ll.addView(imageView,params);
-        }
-
-        info_product_bonus_iv.setOnClickListener(new ShareIndiListener(this,mHandler));
-        info_buy_ib.setOnClickListener(new BonusListener(true,this,mProductData.product.id));
-    }
-
     Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
             int what = msg.what;
             if(what == 1){
-                sendWebPage("限时价￥"+mProductData.product.price+"，"+mProductData.product.name,mProductData.product.description, shareBitmap, mProductData.link,SendMessageToWX.Req.WXSceneTimeline);
+                sendWebPage("限时价￥"+mProductData.floor.price_title+"，"+mProductData.floor.title,mProductData.floor.description, shareBitmap, mProductData.link,SendMessageToWX.Req.WXSceneTimeline);
             }else {
-                sendWebPage("限时价￥"+mProductData.product.price+"，"+mProductData.product.name,mProductData.product.description, shareBitmap, mProductData.link, SendMessageToWX.Req.WXSceneSession);
+                sendWebPage("限时价￥"+mProductData.floor.price_title+"，"+mProductData.floor.title,mProductData.floor.description, shareBitmap, mProductData.link, SendMessageToWX.Req.WXSceneSession);
             }
         }
     };
 
     private void initViewPagerIndicator(){
 
-        for (int k = 0; k < mProductData.product.img.size(); k++) {
+        for (int k = 0; k < mProductData.floor.img.size(); k++) {
 
             RadioButton radioButton = (RadioButton) LayoutInflater.from(this).inflate(R.layout.index_radiobutton, null, false);
             RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(ScreenUtil.dipToPx(this,17), ScreenUtil.dipToPx(this,17));
@@ -297,16 +260,22 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
     }
 
     public void requestProductData(){
-
+        if(!WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false)){
+            Intent intent = new Intent(this,LoginActivity_.class);
+            intent.putExtra("showback",true);
+            startActivity(intent);
+            finish();
+            return;
+        }
         Map<String,String> obj = new HashMap<String,String>();
-        obj.put("product_id", productId);
+        obj.put("floor_id", productId);
         obj.put("user_id", WuliConfig.getInstance().getStringInfoFromLocal(WuliConfig.USER_ID,""));
 
 
-        NormalPostRequest request = new NormalPostRequest(UrlManager.PRODUCT_INFO,
-                new Response.Listener<PProductBean>() {
+        NormalPostRequest request = new NormalPostRequest(UrlManager.GLOBAL_PRODUCT_INFO,
+                new Response.Listener<PGlobalInfoBean>() {
                     @Override
-                    public void onResponse(PProductBean response) {
+                    public void onResponse(PGlobalInfoBean response) {
                         view_net_error.setVisibility(View.GONE);
                         if(!parseHeadObject(response))return;
                         if(response.data == null) return;
@@ -319,7 +288,7 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
                 Log.e("", error.getMessage(), error);
                 net_error_reload_tv.setVisibility(View.VISIBLE);
             }
-        }, obj,PProductBean.class);
+        }, obj,PGlobalInfoBean.class);
         request.doRequest();
     }
 
@@ -337,10 +306,10 @@ public class ProductInfoActivity extends SocialService implements ShareDialog.Al
 //                sendWebPage(infoBean.share_h5_url,title,desc);
 //                break;
             case ButtonType.WEIXIN_POSITION:
-                sendWebPage("限时价￥"+mProductData.product.price+"，"+mProductData.product.name,mProductData.product.description, shareBitmap, mProductData.link, SendMessageToWX.Req.WXSceneSession);
+                sendWebPage("限时价￥"+mProductData.floor.price_title+"，"+mProductData.floor.title,mProductData.floor.description, shareBitmap, mProductData.link, SendMessageToWX.Req.WXSceneSession);
                 break;
             case ButtonType.WGROUP_POSITON:
-                sendWebPage("限时价￥"+mProductData.product.price+"，"+mProductData.product.name,mProductData.product.description, shareBitmap, mProductData.link,SendMessageToWX.Req.WXSceneTimeline);
+                sendWebPage("限时价￥"+mProductData.floor.price_title+"，"+mProductData.floor.title,mProductData.floor.description, shareBitmap, mProductData.link,SendMessageToWX.Req.WXSceneTimeline);
                 break;
 //            case ButtonType.QQ_WEIBO_POSITION:
 //                break;

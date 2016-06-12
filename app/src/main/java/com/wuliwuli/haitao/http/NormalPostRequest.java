@@ -33,6 +33,8 @@ public class NormalPostRequest<T> extends Request<T> {
         mListener = listener;
         mMap = map;
         mClass = tClass;
+
+        Log.d("zt", url);
     }
 
     //mMap是已经按照前面的方式,设置了参数的实例
@@ -46,7 +48,7 @@ public class NormalPostRequest<T> extends Request<T> {
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
             String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-//            Log.d("zt", jsonString);
+            Log.d("zt", jsonString);
             JSONObject obj = new JSONObject(jsonString);
             if(obj.getInt("result") != 1){
                 Looper.prepare();

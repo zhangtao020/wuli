@@ -37,6 +37,7 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
     TabManager mTabManager;
     RadioGroup mRadioG;
     RadioButton mRadios[];
+    int lastCheckedPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +90,11 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
         mGlobalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lastCheckedPosition = 1;
                 mTabhost.setCurrentTabByTag("b");
                 RadioButton rb = (RadioButton) mRadioG.getChildAt(1);
                 rb.setChecked(true);
+                mGlobalBtn.setTextColor(getResources().getColor(R.color.color_282828));
             }
         });
 
@@ -103,6 +106,8 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
             mTabhost.setCurrentTabByTag(savedInstanceState.getString("tag"));
         }else{
             mTabhost.setCurrentTabByTag("b");
+            mGlobalBtn.setSelected(true);
+            mGlobalBtn.setTextColor(getResources().getColor(R.color.color_282828));
         }
     }
 
@@ -110,35 +115,32 @@ public class MainActivity extends AppBaseActivity implements UpdateListener {
         mRadioG = (RadioGroup) findViewById(R.id.btm_navigation);
         mRadios = new RadioButton[3];
         for(int i=0;i<mRadioG.getChildCount();i++){
-//            if(i == 1)continue;
             RadioButton rb = (RadioButton) mRadioG.getChildAt(i);
             mRadios[i] = rb;
-//            if(i ==0){
-//                mRadios[i] = rb;
-//            }else{
-//                mRadios[1] = rb;
-//            }
         }
 
-//        mRadios[0].setChecked(true);
         mRadioG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(RadioGroup rg, int checkedId) {
                 for(int i=0;i<rg.getChildCount();i++){
-//                    if(i == 1)continue;
                     RadioButton rb = (RadioButton) rg.getChildAt(i);
                     if(rb.isChecked()) {
-                        if(i !=0 && !WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false)){
-                            mTabhost.setCurrentTab(0);
-                            mRadios[0].setChecked(true);
+                        if(i == 2 && !WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false)){
+
+                            mTabhost.setCurrentTab(lastCheckedPosition);
+                            mRadios[lastCheckedPosition].setChecked(true);
+                            if(lastCheckedPosition == 1){
+                                mGlobalBtn.setTextColor(getResources().getColor(R.color.color_282828));
+                            }
                             Intent intent = new Intent(MainActivity.this,LoginActivity_.class);
                             intent.putExtra("showback",true);
                             startActivity(intent);
                             break;
                         }
-//                        mTabhost.setCurrentTab(i == 0 ? 0 : 2);
+                        mGlobalBtn.setTextColor(getResources().getColor(R.color.gray_8c8c8c));
                         mTabhost.setCurrentTab(i);
+                        lastCheckedPosition = i;
                         break;
                     }
                 }

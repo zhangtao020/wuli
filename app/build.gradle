@@ -9,8 +9,8 @@ android {
         applicationId "com.wuliwuli.haitao"
         minSdkVersion 11
         targetSdkVersion 23
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 4
+        versionName "1.2"
     }
 
     signingConfigs {
@@ -57,7 +57,6 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
-
 
 def AAVersion = '+'
 dependencies {

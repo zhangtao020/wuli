@@ -88,6 +88,7 @@ public class SettingActivity extends AppBaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 showClearDialog();
             }
         },500);

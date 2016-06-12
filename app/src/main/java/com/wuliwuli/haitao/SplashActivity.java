@@ -35,12 +35,12 @@ public class SplashActivity extends InstrumentedActivity {
                     finish();
                 } else if (!isFirstUse){
                     Intent intent = new Intent();
-                    boolean login = WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false);
+//                    boolean login = WuliConfig.getInstance().getBooleanInfoFromLocal(WuliConfig.IS_LOGIN,false);
                     String type = getIntent().getStringExtra("type");
-                    if(login && "11".equals(type)){
+                    if("11".equals(type)){
                         intent.setClass(SplashActivity.this,MyRedbaoActivity.class);
                     }else{
-                        intent.setClass(SplashActivity.this,login?MainActivity.class:LoginActivity_.class);
+                        intent.setClass(SplashActivity.this,MainActivity.class);
                     }
                     startActivity(intent);
                     SplashActivity.this.finish();

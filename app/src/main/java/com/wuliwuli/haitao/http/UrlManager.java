@@ -34,5 +34,6 @@ public class UrlManager {
 	public static String CHECK_UPDATE = MAIN_URL + "PublicApi/app_update";//检查更新
 	public static String JPUSH_RECEIVE = MAIN_URL + "Api/update_clientid";//上传jpush id
 	public static String SUPER_RETURN = MAIN_URL + "Api/supermoney";//超级返
-
+	public static String GOLBAL_PRICE = MAIN_URL + "Api/floorprice";//全球最低价列表
+	public static String GLOBAL_PRODUCT_INFO = MAIN_URL + "Api/floorinfo";//商品详情
 }
